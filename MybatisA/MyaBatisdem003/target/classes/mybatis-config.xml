@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--  引入properties文件  -->
+    <properties resource="jdbc.properties" />
+<!--  TypeAliases设置映射结果实体类的别名 ，别名不区分大小写,没有alias那么就是默认的类名 -->
+    <typeAliases>
+<!--        <typeAlias type="pojo.com.wzy.mybatis.User"></typeAlias>-->
+        <package name="com.wzy.mybatis.pojo"/>
+    </typeAliases>
+    <environments default="development">
+<!--    environment用来配置某个具体的环境
+        id就是连接数据库环境的唯一标识
+    -->
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射文件-->
+    <mappers>
+<!--        <mapper resource="mappers/UserMapper.xml"/>-->
+        <package name="com.wzy.mybatis.mapper"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wzy.mybatis.mapper.DataMapper">
+    <insert id="insertRules">
+        insert into rules values (null,#{ruledata})
+    </insert>
+
+
+    <select id="selectRules" resultType="String">
+        select ruledata from rules where id = #{id}
+    </select>
+
+</mapper>
