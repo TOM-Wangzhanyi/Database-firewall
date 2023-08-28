@@ -38,10 +38,11 @@ public class TestSql {
 
             //加载原始数据，用于测试
             Instances trainData = ConverterUtils.DataSource.read("structure.arff");
+         //   Instances trainData2 = ConverterUtils.DataSource.read("output1.arff");
             Instance instance = new DenseInstance(2);
             instance.setDataset(trainData);
             instance.setValue(0, sql);
-            instance.setValue(1,"1");   //没有这个会报错
+            instance.setValue(1,"0");   //没有这个会报错
             System.out.println("原始数据" + instance);
             trainData.add(1,instance);
            // System.out.println(trainData.instance(1));
@@ -54,6 +55,8 @@ public class TestSql {
 
 
             // System.out.println("向量化后的数据" + filteredInstance);
+
+
 
             double pred = model.classifyInstance(filteredInstance);
             //model.distributionForInstance(filteredInstance) ;

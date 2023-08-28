@@ -1,0 +1,7 @@
+@relation iris-weka.filters.unsupervised.attribute.NominalToString-C1-weka.filters.unsupervised.attribute.NumericToNominal-R2
+
+@attribute Query string
+@attribute Label {1,0}
+
+@data
+'SELECT * FROM divide WHERE went = \"selection\" LIMIT 3',0
