@@ -25,7 +25,7 @@ import java.io.ObjectInputStream;
 
 //加载模型并判断单个sql
 public class TestSql {
-        public static void testSql(String sql) throws Exception {
+        public static double testSql(String sql) throws Exception {
             ObjectInputStream ois1 = new ObjectInputStream(new FileInputStream("J48.model"));
             J48 model = (J48) ois1.readObject();
             ois1.close();
@@ -64,6 +64,7 @@ public class TestSql {
                 System.out.println("这是一个安全的sql语句");
             else if(pred >= 0.5)
                 System.out.println("这是一个sql注入语句");
+            return pred ;
 
         }
 }

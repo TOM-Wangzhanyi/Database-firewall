@@ -27,7 +27,7 @@ import java.util.Random;
 public class TrainAndSaveModel {
     public static void trainAndSaveModel() throws Exception {
         //读取文件
-        Instances data = ConverterUtils.DataSource.read("C:\\\\Users\\\\wzyxi\\\\Desktop\\\\M.arff");
+        Instances data = ConverterUtils.DataSource.read("M.arff");
         //构造向量化方法并使用
         StringToWordVector filter = new StringToWordVector() ;
         filter.setMinTermFreq(30);
@@ -67,8 +67,9 @@ public class TrainAndSaveModel {
         oos1.writeObject(tree);
         oos1.close();
 
-        ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream("vector-filter.model"));
+       /* ObjectOutputStream oos2 = new ObjectOutputStream(new FileOutputStream("vector-filter.model"));
         oos2.writeObject(filter);
-        oos2.close();
+        oos2.close();*/
+        filter.getDictionaryFileToSaveTo();
     }
 }

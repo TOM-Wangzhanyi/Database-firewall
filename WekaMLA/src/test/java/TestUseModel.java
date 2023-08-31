@@ -34,8 +34,17 @@ public class TestUseModel {
         TrainAndSaveModel.trainAndSaveModel();
     }
     @Test
+    //说明泛化能力不行
     public void testLoadModelAndTestSql() throws Exception {
-        TestSql.testSql("SELECT * FROM cream WHERE break = 'around'");
+        Instances trainData = ConverterUtils.DataSource.read("TestData.arff");
+        trainData.setClassIndex(1);
+        double sum = 0 ;
+        for(int i = 0 ; i < trainData.numInstances() ; i++) {
+            double pre  = TestSql.testSql(trainData.instance(i).stringValue(0));
+            if(pre == trainData.instance(i).classValue())
+                sum++ ;
+        }
+        System.out.println("解雇送"+ sum);
     }
     @Test
     public void testLoadModelAndTestSqlA() throws Exception {
