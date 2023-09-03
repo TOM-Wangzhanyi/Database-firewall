@@ -6,9 +6,11 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 import weka.core.pmml.jaxbbindings.True;
+import weka.core.stemmers.IteratedLovinsStemmer;
 import weka.core.tokenizers.WordTokenizer;
 import weka.filters.unsupervised.attribute.StringToWordVector;
 import wzy.model.SingleModel;
+import wzy.model.TestSql;
 
 import java.awt.dnd.DropTarget;
 import java.util.TreeSet;
@@ -40,15 +42,31 @@ public class Test {
         filter.setTokenizer(new WordTokenizer());
         filter.setIDFTransform(true);
         filter.setTFTransform(true);
+        filter.setStemmer(new IteratedLovinsStemmer());
         fc.setFilter(filter);
         //关键是这个大小写
         filter.setLowerCaseTokens(true);
         J48 tree = new J48() ;
+
+        String options[]=new String[3];//训练参数数组
+
+        options[0]="-R";//使用reduced error pruning
+
+        options[1]="-M";//叶子上的最小实例数
+
+        options[2]="3";//set叶子上的最小实例数
+
+        tree.setOptions(options);//设置训练参数
+        /*String[] normalOptions = new String[]{"-S","2.0","-T","-1.0"};
+        tree.setOptions(normalOptions);*/
+
+      //tree.setSeed(1);
         /*tree.setBinarySplits(true);
         tree.setNumFolds(10);*/
         fc.setClassifier(tree);
 
         fc.setBatchSize("10");
+
         fc.buildClassifier(data);
 
 
@@ -89,6 +107,8 @@ public class Test {
         long endTime=System.currentTimeMillis(); //获取结束时间
         System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
 
+
+
     }
 
     @org.junit.Test
@@ -110,8 +130,6 @@ public class Test {
     }
 
     @org.junit.Test
-
-    //这个方法才是最终的方法，好险好险
     public void testInstance() throws Exception {
         FilteredClassifier fc = SingleModel.getInstance() ;
         Instances demo = ConverterUtils.DataSource.read("demo.arff");
