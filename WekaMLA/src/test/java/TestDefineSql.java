@@ -24,7 +24,6 @@ import java.io.ObjectInputStream;
 
 
 //structure.afrr是训练的时候用的数据集    //demo是为了创建instance方便设置的数据集  //MMM是统一向量化后的格式
-    //这个方法可以作为最终的方法了，目前问题剩下sql解析以及单双引号
 public class TestDefineSql {
     @Test
     public void testDefineSql() throws Exception {
