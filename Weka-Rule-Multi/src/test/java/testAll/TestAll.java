@@ -61,5 +61,6 @@ public class TestAll {
     @Test
     public void change(){
         WekaSingelton.changeDemo("src/main/resources/sqlData/demo.arff");
+        WekaSingelton.changeFc("src/main/resources/trained-Classifier/fc.model");
     }
     }
