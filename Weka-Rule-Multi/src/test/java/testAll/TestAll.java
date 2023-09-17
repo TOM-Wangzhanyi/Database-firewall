@@ -57,4 +57,9 @@ public class TestAll {
         String str = finalAll.finalAll("select * from t_user") ;
         System.out.println(str);
     }
+
+    @Test
+    public void change(){
+        WekaSingelton.changeDemo("src/main/resources/sqlData/demo.arff");
+    }
     }
