@@ -18,8 +18,6 @@ import static weka.core.SerializationHelper.read;
  * @Version: v1.0
  */
 public class WekaSingelton {
-    //获取一个乐观锁
-    private static final StampedLock stampedLock = new StampedLock();
     private static FilteredClassifier fc ;
     private static Instances demo ;
     static {
@@ -42,24 +40,18 @@ public class WekaSingelton {
     }
 
     public static void changeFc(String path) {
-        long stamp = stampedLock.writeLock(); // 获取写锁
         try {
             fc = (FilteredClassifier) weka.core.SerializationHelper.read(path);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            stampedLock.unlockWrite(stamp); // 释放写锁
         }
     }
 
     public static void changeDemo(String path) {
-        long stamp = stampedLock.writeLock(); // 获取写锁
         try {
             demo = ConverterUtils.DataSource.read(path);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        } finally {
-            stampedLock.unlockWrite(stamp); // 释放写锁
         }
     }
     private WekaSingelton(){

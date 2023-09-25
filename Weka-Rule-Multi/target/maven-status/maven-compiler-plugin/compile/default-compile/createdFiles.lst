@@ -1,0 +1,15 @@
+multi\FinalAll.class
+entity\Result.class
+multi\MLAndRuleTask.class
+weka\WekaSingelton.class
+com\example\meal_ordering_system\test\SqlPlugin.class
+com\example\meal_ordering_system\test\SelectPlugin.class
+rule\DroolsRuleServiceImpl.class
+rule\DroolsRule.class
+multi\SimpleUse.class
+multi\MLUseTask.class
+com\example\meal_ordering_system\test\LogPlugin.class
+com\example\meal_ordering_system\test\ExempleINterceptor.class
+rule\DroolsManager.class
+rule\DroolsRuleService.class
+multi\InitThreadPool.class

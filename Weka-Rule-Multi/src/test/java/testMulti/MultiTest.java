@@ -1,10 +1,8 @@
 package testMulti;
 
 import multi.InitThreadPool;
-import multi.MLAndRule;
-import multi.SimpleUse;
+import multi.MLAndRuleTask;
 import org.junit.jupiter.api.Test;
-import weka.core.stemmers.Stemmer;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -23,11 +21,11 @@ public class MultiTest {
     @Test
     public void multiTest() throws ExecutionException, InterruptedException {
         ExecutorService executor = InitThreadPool.getInstance() ;
-        MLAndRule task1 = new MLAndRule("select * from t_user") ;
-        MLAndRule task2 = new MLAndRule("select * from t_user") ;
-        MLAndRule task3 = new MLAndRule("select * from t_user") ;
-        MLAndRule task4 = new MLAndRule("select * from t_user") ;
-        MLAndRule task5 = new MLAndRule("select * from t_user") ;
+        MLAndRuleTask task1 = new MLAndRuleTask("select * from t_user") ;
+        MLAndRuleTask task2 = new MLAndRuleTask("select * from t_user") ;
+        MLAndRuleTask task3 = new MLAndRuleTask("select * from t_user") ;
+        MLAndRuleTask task4 = new MLAndRuleTask("select * from t_user") ;
+        MLAndRuleTask task5 = new MLAndRuleTask("select * from t_user") ;
         Future<String> future = executor.submit(task1) ;
         String str = future.get() ;
         System.out.println(str);

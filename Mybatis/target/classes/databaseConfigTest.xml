@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 先加载内部标签，再加载外部文件，名称一致时，会替换内容 -->
+    <properties resource="jdbc.properties"/>
+
+    <!-- 注册对象的空间命名 -->
+    <environments default="test_development">
+        <environment id="test_development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!-- 1.加载数据库驱动 -->
+                <property name="driver" value="${test.jdbc.driver}"/>
+                <!-- 2.数据库连接地址 -->
+                <property name="url" value="${test.jdbc.url}"/>
+                <!-- 数据库用户... -->
+                <property name="username" value="${test.jdbc.username}"/>
+                <!-- 数据库密码... -->
+                <property name="password" value="${test.jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!-- 注册映射文件：java对象与数据库之间的xml文件路径！ -->
+    <mappers>
+        <mapper resource="com/wzy/mybatis/mapper/TestMapper.xml"/>
+    </mappers>
+</configuration>

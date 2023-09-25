@@ -1,5 +1,6 @@
 package com.example.meal_ordering_system.test;
 
+import com.example.meal_ordering_system.test.SqlPlugin;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +20,9 @@ public class MybatisInterceptorConfig {
     @Bean
     public String myInterceptor(SqlSessionFactory sqlSessionFactory) {
 
-        SelectPlugin plugin = new SelectPlugin();
-    //    sqlSessionFactory.getConfiguration().addInterceptor(plugin);
-        sqlSessionFactory.getConfiguration().addInterceptor(new SqlPlugin());
+        SqlPlugin plugin = new SqlPlugin() ;
+        sqlSessionFactory.getConfiguration().addInterceptor(plugin);
+     //   sqlSessionFactory.getConfiguration().addInterceptor(new SqlPlugin());
       //  sqlSessionFactory.getConfiguration().addInterceptor(new ResultInterceptor());
         return "interceptor";
     }

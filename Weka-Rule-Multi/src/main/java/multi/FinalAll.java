@@ -16,7 +16,7 @@ import java.util.concurrent.Future;
 public class FinalAll {
     public String finalAll(String sql) throws ExecutionException, InterruptedException {
         ExecutorService executor = InitThreadPool.getInstance();
-        MLAndRule task1 = new MLAndRule(sql);
+        MLAndRuleTask task1 = new MLAndRuleTask(sql);
         Future<String> future = executor.submit(task1);
         String str = future.get();
         executor.shutdown();

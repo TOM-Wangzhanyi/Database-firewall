@@ -1,0 +1,5 @@
+com\wzy\test\InterceptMapperTest.class
+com\wzy\test\SQLMapperTest.class
+com\wzy\test\SelectMapperTest.class
+com\wzy\test\TestMapperDataSource.class
+com\wzy\test\ParameterMapeerTest.class

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 子节点<property> ：用来定义变量值，它有两个属性name和value，通过<property>定义的值会被插入到logger上下文中，可以使“${}”来使用变量-->
+    <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss} %c{1} %L [%p] %m%n %caller{0}"/>
+
+    <!-- 获取Environment中的值; 属性文件中可以设置 log.path的值来动态变更路径-->
+    <springProperty scope="context" name="log.path" source="log.path"/>
+
+    <!-- 把日志输出到控制台-->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度,%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{50} >>> %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="common" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/common.log</file>
+        <!-- 如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true。 -->
+        <append>true</append>
+        <!-- 对记录事件进行格式化 -->
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <!-- 匹配>=INFO级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/common.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <!-- 可选节点，控制保留的归档文件的最大天数。-->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="exception" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/exception.log</file>
+        <append>true</append>
+        <!-- 匹配>=ERROR级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.path}/exception.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <appender name="mysql_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/mysql_log.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 日志文件输出文件名 -->
+            <FileNamePattern>${log.path}/mysql_log.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <!-- 日志文件保留天数 -->
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+
+
+    <!-- 打印mysql日志  name= 存放mapper的包名; 注意mybatis-plus.configuration.log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+        如果log-impl: org.apache.ibatis.logging.stdout.StdOutImpl ;则只会打印到控制台;不会存放到文件
+    -->
+    <logger name="com.xxx.mapper" level="DEBUG" additivity="false">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="mysql_log" />
+    </logger>
+
+
+    <!-- 用来设置某一个包或具体的某一个类的日志打印级别、以及指定<appender>。
+    name: 用来指定受此loger约束的某一个包或者具体的某一个类。
+    level: 如果未设置此属性，那么当前loger将会继承上级的级别。上级是<root>
+    addtivity:是否向上级logger传递打印信息。默认是true
+    -->
+
+
+    <!--它是根loger,是所有<loger>的上级。只有一个level属性，因为name已经被命名为"root",且已经是最上级了。 -->
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="common"/>
+        <appender-ref ref="exception"/>
+    </root>
+</configuration>
+

@@ -1,0 +1,8 @@
+@relation iris-weka.filters.unsupervised.attribute.NominalToString-C1-weka.filters.unsupervised.attribute.NumericToNominal-R2
+
+@attribute Query string
+@attribute Label {0,1}
+
+@data
+'\"-9725\"  )   union all select 2481,2481,2481,2481,2481,2481,2481,2481,2481,2481--\"',1
+

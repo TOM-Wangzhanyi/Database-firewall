@@ -1,0 +1,16 @@
+com\wzy\mybatis\mapper\TestMapper.class
+com\wzy\mybatis\utils\SqlSessionUtils.class
+com\wzy\mybatis\plugin\ParameterHandlerPlugin.class
+com\wzy\mybatis\mapper\SelectMapper.class
+com\wzy\mybatis\plugin\StatementHandlerPlugin.class
+com\wzy\mybatis\baoqiang\Sever3.class
+com\wzy\mybatis\plugin\TestNewDataSourcePlugin.class
+com\wzy\mybatis\plugin\LogPlugin.class
+com\wzy\mybatis\mapper\InterceptMapper.class
+com\wzy\mybatis\pojo\User.class
+com\wzy\mybatis\mapper\SQLMapper.class
+com\wzy\mybatis\plugin\SqlPlugin.class
+com\wzy\mybatis\baoqiang\Client3.class
+com\wzy\mybatis\pojo\TestIntercepter.class
+com\wzy\mybatis\mapper\ParameterMapper.class
+com\wzy\mybatis\plugin\ExamplePlugin.class

@@ -1,0 +1,7 @@
+testMulti\MultiTest.class
+testRule\TestDrools.class
+testAll\TestAll.class
+testRule\TestReturnResult.class
+testRule\TestSingleDroolsManager.class
+testWeka\WekaTest.class
+testRule\TestRemoveRule.class

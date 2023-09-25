@@ -1,0 +1,801 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.meta.FilteredClassifier -F "weka.filters.unsupervised.attribute.StringToWordVector -R 1 -W 1100 -prune-rate -1.0 -T -I -N 0 -L -stemmer weka.core.stemmers.IteratedLovinsStemmer -stopwords-handler weka.core.stopwords.MultiStopwords -M 30 -tokenizer \"weka.core.tokenizers.WordTokenizer -delimiters \\\" \\\\r\\\\n\\\\t.,;:\\\\\\\'\\\\\\\"()?!\\\"\"" -S 0 -W weka.classifiers.trees.REPTree -- -M 2 -V 0.001 -N 3 -S 1 -L -1 -I 0.0
+Relation:     M-weka.filters.unsupervised.attribute.Discretize-B10-M-1.0-Rfirst-last-precision6-weka.filters.unsupervised.attribute.NumericToNominal-R2-weka.filters.unsupervised.attribute.NominalToString-Clast-weka.filters.unsupervised.attribute.NominalToString-C1-weka.filters.unsupervised.attribute.StringToNominal-R2
+Instances:    30919
+Attributes:   2
+              Query
+              Label
+Test mode:    split 77.0% train, remainder test
+
+=== Classifier model (full training set) ===
+
+FilteredClassifier using weka.classifiers.trees.REPTree -M 2 -V 0.001 -N 3 -S 1263925463 -L -1 -I 0.0 on data filtered through weka.filters.unsupervised.attribute.StringToWordVector -R 1 -W 1100 -prune-rate -1.0 -T -I -N 0 -L -stemmer weka.core.stemmers.IteratedLovinsStemmer -stopwords-handler weka.core.stopwords.MultiStopwords -M 30 -tokenizer "weka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\""
+
+Filtered Header
+@relation 'M-weka.filters.unsupervised.attribute.Discretize-B10-M-1.0-Rfirst-last-precision6-weka.filters.unsupervised.attribute.NumericToNominal-R2-weka.filters.unsupervised.attribute.NominalToString-Clast-weka.filters.unsupervised.attribute.NominalToString-C1-weka.filters.unsupervised.attribute.StringToNominal-R2-weka.filters.unsupervised.attribute.StringToWordVector-R1-W1100-prune-rate-1.0-T-I-N0-L-stemmerweka.core.stemmers.IteratedLovinsStemmer-stopwords-handlerweka.core.stopwords.MultiStopwords-M30-tokenizerweka.core.tokenizers.WordTokenizer -delimiters \" \\r\\n\\t.,;:\\\'\\\"()?!\"'
+
+@attribute Label {0,1}
+@attribute * numeric
+@attribute + numeric
+@attribute 0 numeric
+@attribute 09 numeric
+@attribute 1 numeric
+@attribute 10 numeric
+@attribute 1996-07-01 numeric
+@attribute 1996-07-31 numeric
+@attribute 2 numeric
+@attribute 20 numeric
+@attribute 2017-06-15 numeric
+@attribute 21 numeric
+@attribute 3 numeric
+@attribute 30 numeric
+@attribute 34 numeric
+@attribute 3select numeric
+@attribute 4 numeric
+@attribute 5 numeric
+@attribute 50 numeric
+@attribute 6 numeric
+@attribute 7 numeric
+@attribute 8 numeric
+@attribute 9 numeric
+@attribute = numeric
+@attribute a numeric
+@attribute acr numeric
+@attribute act numeric
+@attribute actu numeric
+@attribute ad numeric
+@attribute addit numeric
+@attribute ag numeric
+@attribute al numeric
+@attribute and numeric
+@attribute ant numeric
+@attribute appl numeric
+@attribute ar numeric
+@attribute arm numeric
+@attribute arrang numeric
+@attribute as numeric
+@attribute asc numeric
+@attribute at numeric
+@attribute atom numeric
+@attribute av numeric
+@attribute avg numeric
+@attribute b numeric
+@attribute ba numeric
+@attribute bad numeric
+@attribute bal numeric
+@attribute bar numeric
+@attribute be numeric
+@attribute becom numeric
+@attribute between numeric
+@attribute bit numeric
+@attribute blank numeric
+@attribute breath numeric
+@attribute brok numeric
+@attribute build numeric
+@attribute bus numeric
+@attribute by numeric
+@attribute c numeric
+@attribute c/ numeric
+@attribute cal numeric
+@attribute cam numeric
+@attribute can numeric
+@attribute car numeric
+@attribute certain numeric
+@attribute ch numeric
+@attribute chang numeric
+@attribute character numeric
+@attribute cit numeric
+@attribute cl numeric
+@attribute clear numeric
+@attribute cloth numeric
+@attribute column_nam numeric
+@attribute com numeric
+@attribute comb numeric
+@attribute compl numeric
+@attribute condit numeric
+@attribute cook numeric
+@attribute correct numeric
+@attribute count numeric
+@attribute countr numeric
+@attribute cour numeric
+@attribute cr numeric
+@attribute cur numeric
+@attribute customer numeric
+@attribute customernam numeric
+@attribute cut numeric
+@attribute d numeric
+@attribute danger numeric
+@attribute dark numeric
+@attribute de numeric
+@attribute deep numeric
+@attribute del numeric
+@attribute desc numeric
+@attribute di numeric
+@attribute differ numeric
+@attribute direct numeric
+@attribute dirt numeric
+@attribute dist numeric
+@attribute distinct numeric
+@attribute do numeric
+@attribute dol numeric
+@attribute dr numeric
+@attribute driv numeric
+@attribute drop numeric
+@attribute ea numeric
+@attribute ear numeric
+@attribute eat numeric
+@attribute el numeric
+@attribute empl numeric
+@attribute employeeid numeric
+@attribute entir numeric
+@attribute equ numeric
+@attribute es numeric
+@attribute ev numeric
+@attribute exact numeric
+@attribute excit numeric
+@attribute expect numeric
+@attribute expr numeric
+@attribute fac numeric
+@attribute fact numeric
+@attribute fair numeric
+@attribute fal numeric
+@attribute fam numeric
+@attribute fast numeric
+@attribute fetch numeric
+@attribute fight numeric
+@attribute fin numeric
+@attribute first numeric
+@attribute fl numeric
+@attribute fort numeric
+@attribute fr numeric
+@attribute from numeric
+@attribute fun numeric
+@attribute ge numeric
+@attribute gener numeric
+@attribute german numeric
+@attribute giv numeric
+@attribute gl numeric
+@attribute go numeric
+@attribute gold numeric
+@attribute gr numeric
+@attribute great numeric
+@attribute group numeric
+@attribute hand numeric
+@attribute hap numeric
+@attribute hav numeric
+@attribute he numeric
+@attribute head numeric
+@attribute hid numeric
+@attribute high numeric
+@attribute id numeric
+@attribute imag numeric
+@attribute import numeric
+@attribute in numeric
+@attribute inclus numeric
+@attribute individu numeric
+@attribute inner numeric
+@attribute inser numeric
+@attribute inst numeric
+@attribute int numeric
+@attribute is numeric
+@attribute join numeric
+@attribute la numeric
+@attribute left numeric
+@attribute lik numeric
+@attribute lim numeric
+@attribute list numeric
+@attribute lo numeric
+@attribute loc numeric
+@attribute lov numeric
+@attribute lunch numeric
+@attribute ma numeric
+@attribute mad numeric
+@attribute main numeric
+@attribute mak numeric
+@attribute mar numeric
+@attribute mark numeric
+@attribute me numeric
+@attribute menu_order numeric
+@attribute meta_id numeric
+@attribute meta_k numeric
+@attribute meta_valu numeric
+@attribute mi numeric
+@attribute mic numeric
+@attribute might numeric
+@attribute mil numeric
+@attribute min numeric
+@attribute most numeric
+@attribute mov numeric
+@attribute mus numeric
+@attribute nam numeric
+@attribute nat numeric
+@attribute natur numeric
+@attribute near numeric
+@attribute need numeric
+@attribute new numeric
+@attribute nl numeric
+@attribute no numeric
+@attribute not numeric
+@attribute off numeric
+@attribute on numeric
+@attribute onl numeric
+@attribute onlyselect numeric
+@attribute option_nam numeric
+@attribute option_valu numeric
+@attribute or numeric
+@attribute order numeric
+@attribute ordersinner numeric
+@attribute ordersright numeric
+@attribute organ numeric
+@attribute origin numeric
+@attribute outer numeric
+@attribute pa numeric
+@attribute pack numeric
+@attribute part numeric
+@attribute particl numeric
+@attribute perc numeric
+@attribute person numeric
+@attribute pil numeric
+@attribute pl numeric
+@attribute plan numeric
+@attribute po numeric
+@attribute pon numeric
+@attribute popl numeric
+@attribute posit numeric
+@attribute post_id numeric
+@attribute post_nam numeric
+@attribute post_status numeric
+@attribute post_titl numeric
+@attribute post_typ numeric
+@attribute power numeric
+@attribute pr numeric
+@attribute pract numeric
+@attribute produc numeric
+@attribute proper numeric
+@attribute prov numeric
+@attribute publ numeric
+@attribute put numeric
+@attribute qu numeric
+@attribute quick numeric
+@attribute read numeric
+@attribute rec numeric
+@attribute ri numeric
+@attribute rid numeric
+@attribute right numeric
+@attribute ro numeric
+@attribute rock numeric
+@attribute row numeric
+@attribute s numeric
+@attribute s/n numeric
+@attribute saf numeric
+@attribute san numeric
+@attribute sant numeric
+@attribute sav numeric
+@attribute sc numeric
+@attribute se numeric
+@attribute select numeric
+@attribute sent numeric
+@attribute serv numeric
+@attribute sh numeric
+@attribute sign numeric
+@attribute sil numeric
+@attribute sit numeric
+@attribute slip numeric
+@attribute slow numeric
+@attribute soc numeric
+@attribute sol numeric
+@attribute sold numeric
+@attribute solut numeric
+@attribute sound numeric
+@attribute sql numeric
+@attribute st numeric
+@attribute star numeric
+@attribute stat numeric
+@attribute step numeric
+@attribute stop numeric
+@attribute stud numeric
+@attribute succ numeric
+@attribute sud numeric
+@attribute sum numeric
+@attribute sup numeric
+@attribute suppl numeric
+@attribute swim numeric
+@attribute t numeric
+@attribute table_nam numeric
+@attribute tal numeric
+@attribute teach numeric
+@attribute term_id numeric
+@attribute th numeric
+@attribute to numeric
+@attribute top numeric
+@attribute tr numeric
+@attribute tt numeric
+@attribute tw numeric
+@attribute typ numeric
+@attribute union numeric
+@attribute up numeric
+@attribute upd numeric
+@attribute us numeric
+@attribute usu numeric
+@attribute valu numeric
+@attribute ver numeric
+@attribute view numeric
+@attribute visit numeric
+@attribute wh numeric
+@attribute wid numeric
+@attribute wonder numeric
+@attribute wood numeric
+@attribute wor numeric
+@attribute wp_opt numeric
+@attribute wp_post numeric
+@attribute wp_postm numeric
+@attribute writ numeric
+@attribute ye numeric
+@attribute # numeric
+@attribute '\%' numeric
+@attribute *2 numeric
+@attribute *4906 numeric
+@attribute *6703 numeric
+@attribute +char numeric
+@attribute -- numeric
+@attribute / numeric
+@attribute 0x2 numeric
+@attribute 0x28 numeric
+@attribute 0x4b774c75 numeric
+@attribute 0x4c4d6142 numeric
+@attribute 0x52515a50 numeric
+@attribute 0x544d5a4c numeric
+@attribute 0x5c numeric
+@attribute 0x694a4745 numeric
+@attribute 0x6d457153 numeric
+@attribute 0x7171706a71 numeric
+@attribute 0x717a767a71 numeric
+@attribute 0x76555642 numeric
+@attribute 0x78 numeric
+@attribute 1# numeric
+@attribute '1\%' numeric
+@attribute 1-- numeric
+@attribute 1/ numeric
+@attribute 1/0 numeric
+@attribute 100 numeric
+@attribute 101 numeric
+@attribute 102 numeric
+@attribute 1022 numeric
+@attribute 103 numeric
+@attribute 1032 numeric
+@attribute 1045 numeric
+@attribute 105 numeric
+@attribute 106 numeric
+@attribute 107 numeric
+@attribute 108 numeric
+@attribute 109 numeric
+@attribute 111 numeric
+@attribute 112 numeric
+@attribute 113 numeric
+@attribute 116 numeric
+@attribute 1161 numeric
+@attribute 117 numeric
+@attribute 118 numeric
+@attribute 119 numeric
+@attribute 120 numeric
+@attribute 121 numeric
+@attribute 1210 numeric
+@attribute 122 numeric
+@attribute 1297 numeric
+@attribute 1441 numeric
+@attribute 1570 numeric
+@attribute 1808 numeric
+@attribute 2* numeric
+@attribute 2006 numeric
+@attribute 2367 numeric
+@attribute 2388 numeric
+@attribute 2633 numeric
+@attribute 2716 numeric
+@attribute 2724 numeric
+@attribute 2853 numeric
+@attribute 3020 numeric
+@attribute 3038 numeric
+@attribute 3051 numeric
+@attribute 3114 numeric
+@attribute 3202 numeric
+@attribute 3393 numeric
+@attribute 3440 numeric
+@attribute 3484 numeric
+@attribute 3580 numeric
+@attribute 3623 numeric
+@attribute 3702 numeric
+@attribute 3707 numeric
+@attribute 3715 numeric
+@attribute 3754 numeric
+@attribute 3785 numeric
+@attribute 3824 numeric
+@attribute 3931 numeric
+@attribute 4144 numeric
+@attribute 4232 numeric
+@attribute 4240 numeric
+@attribute 4241 numeric
+@attribute 4249 numeric
+@attribute 4386 numeric
+@attribute 4411 numeric
+@attribute 4493 numeric
+@attribute 4587 numeric
+@attribute 4595 numeric
+@attribute 4595# numeric
+@attribute 4747 numeric
+@attribute 48 numeric
+@attribute 49 numeric
+@attribute 4915 numeric
+@attribute 5000000 numeric
+@attribute 500000000 numeric
+@attribute 500000000/2 numeric
+@attribute 5000000000 numeric
+@attribute 5012 numeric
+@attribute 5023 numeric
+@attribute 5192 numeric
+@attribute 5286 numeric
+@attribute 5356 numeric
+@attribute 5389 numeric
+@attribute 5451 numeric
+@attribute 5556 numeric
+@attribute 5584 numeric
+@attribute 58 numeric
+@attribute 5840 numeric
+@attribute 5873 numeric
+@attribute 5903 numeric
+@attribute 60 numeric
+@attribute 6055 numeric
+@attribute 62 numeric
+@attribute 6237 numeric
+@attribute 6240 numeric
+@attribute 6270 numeric
+@attribute 6272 numeric
+@attribute 6414 numeric
+@attribute 65 numeric
+@attribute 6510 numeric
+@attribute 6537 numeric
+@attribute 66 numeric
+@attribute 67 numeric
+@attribute 6793 numeric
+@attribute 68 numeric
+@attribute 6872 numeric
+@attribute 69 numeric
+@attribute 6969 numeric
+@attribute 6979 numeric
+@attribute 70 numeric
+@attribute 7158 numeric
+@attribute 7185 numeric
+@attribute 72 numeric
+@attribute 7259 numeric
+@attribute 7417 numeric
+@attribute 7427 numeric
+@attribute 7469 numeric
+@attribute 75 numeric
+@attribute 7533 numeric
+@attribute 7552 numeric
+@attribute 7562 numeric
+@attribute 76 numeric
+@attribute 7689 numeric
+@attribute 77 numeric
+@attribute 7756 numeric
+@attribute 79 numeric
+@attribute 7982 numeric
+@attribute 80 numeric
+@attribute 8113 numeric
+@attribute 8148 numeric
+@attribute 8156 numeric
+@attribute 8189 numeric
+@attribute 8190 numeric
+@attribute 83 numeric
+@attribute 8312 numeric
+@attribute 8315 numeric
+@attribute 8384 numeric
+@attribute 8403 numeric
+@attribute 8407 numeric
+@attribute 8421 numeric
+@attribute 8446744073709551610 numeric
+@attribute 8459 numeric
+@attribute 8466 numeric
+@attribute 8488 numeric
+@attribute 85 numeric
+@attribute 8514 numeric
+@attribute 8571 numeric
+@attribute 8571-- numeric
+@attribute 8594 numeric
+@attribute 8635 numeric
+@attribute 8666 numeric
+@attribute 87 numeric
+@attribute 88 numeric
+@attribute 8899 numeric
+@attribute 90 numeric
+@attribute 9067 numeric
+@attribute 9173 numeric
+@attribute 9198 numeric
+@attribute 9198-- numeric
+@attribute 9254 numeric
+@attribute 9255 numeric
+@attribute 9323 numeric
+@attribute 9323# numeric
+@attribute 9354 numeric
+@attribute 9627 numeric
+@attribute 9643 numeric
+@attribute 9660 numeric
+@attribute 97 numeric
+@attribute 99 numeric
+@attribute 9981 numeric
+@attribute > numeric
+@attribute @ numeric
+@attribute @@ver numeric
+@attribute __time__ numeric
+@attribute abcdefg numeric
+@attribute admin numeric
+@attribute all_user numeric
+@attribute an numeric
+@attribute banner numeric
+@attribute benchmark numeric
+@attribute boolean numeric
+@attribute ca numeric
+@attribute cast numeric
+@attribute char numeric
+@attribute character_ numeric
+@attribute chr numeric
+@attribute column numeric
+@attribute concat numeric
+@attribute conver numeric
+@attribute crypt_k numeric
+@attribute ctx numeric
+@attribute db numeric
+@attribute dbms_pip numeric
+@attribute dbms_util numeric
+@attribute domain numeric
+@attribute drithsx numeric
+@attribute dual numeric
+@attribute dual-- numeric
+@attribute elt numeric
+@attribute en numeric
+@attribute end-- numeric
+@attribute exp numeric
+@attribute extractvalu numeric
+@attribute floor numeric
+@attribute funct numeric
+@attribute fzn numeric
+@attribute gcr numeric
+@attribute generate_ser numeric
+@attribute get_host_addr numeric
+@attribute hec numeric
+@attribute i numeric
+@attribute if numeric
+@attribute iif numeric
+@attribute information_schem numeric
+@attribute make_ numeric
+@attribute master numeric
+@attribute md5 numeric
+@attribute mod numeric
+@attribute mysql numeric
+@attribute null# numeric
+@attribute null-- numeric
+@attribute numer numeric
+@attribute pg_sleep numeric
+@attribute procedur numeric
+@attribute qqpjq numeric
+@attribute qzvzq numeric
+@attribute rand numeric
+@attribute randomblob numeric
+@attribute rdb$col numeric
+@attribute rdb$datab numeric
+@attribute rdb$field numeric
+@attribute rdb$funct numeric
+@attribute rdb$typ numeric
+@attribute receive_m numeric
+@attribute regexp_substr numeric
+@attribute repeat numeric
+@attribute rlik numeric
+@attribute rown numeric
+@attribute sd numeric
+@attribute sgv numeric
+@attribute sleep numeric
+@attribute sn numeric
+@attribute sqlid_to_sqlhash numeric
+@attribute srmq numeric
+@attribute sy numeric
+@attribute sys1 numeric
+@attribute sys2 numeric
+@attribute sys3 numeric
+@attribute sys4 numeric
+@attribute sys5 numeric
+@attribute sys6 numeric
+@attribute sys7 numeric
+@attribute sysdatab numeric
+@attribute sysibm numeric
+@attribute systabl numeric
+@attribute system_user numeric
+@attribute sysuser numeric
+@attribute t1 numeric
+@attribute t2 numeric
+@attribute t3 numeric
+@attribute t4 numeric
+@attribute t5 numeric
+@attribute tabl numeric
+@attribute text|| numeric
+@attribute then numeric
+@attribute updatexml numeric
+@attribute upper numeric
+@attribute user numeric
+@attribute utl_inaddr numeric
+@attribute v$ver numeric
+@attribute vwyq numeric
+@attribute waitfor numeric
+@attribute when numeric
+@attribute x numeric
+@attribute xmltyp numeric
+@attribute ydpu numeric
+@attribute || numeric
+@attribute ||char numeric
+@attribute ||chr numeric
+@attribute ~ numeric
+
+@data
+
+
+Classifier Model
+
+REPTree
+============
+
+1 < 0.48
+|   = < 0.33
+|   |   al < 0.92
+|   |   |   5 < 1.03
+|   |   |   |   t1 < 1.23
+|   |   |   |   |   from < 0.27
+|   |   |   |   |   |   order < 1.04
+|   |   |   |   |   |   |   lik < 1.05
+|   |   |   |   |   |   |   |   -- < 0.88
+|   |   |   |   |   |   |   |   |   or < 0.73
+|   |   |   |   |   |   |   |   |   |   # < 1.3
+|   |   |   |   |   |   |   |   |   |   |   || < 1.17
+|   |   |   |   |   |   |   |   |   |   |   |   s < 1.12
+|   |   |   |   |   |   |   |   |   |   |   |   |   + < 1.26
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   1% < 1.18
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   union < 0.83
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   nam < 2.37
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   admin < 2.27
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   sleep < 1.24 : 0 (5781/77) [2841/34]
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   sleep >= 1.24 : 1 (3/1) [1/0]
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   admin >= 2.27 : 1 (2/0) [0/0]
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   nam >= 2.37 : 1 (5/2) [5/2]
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   |   union >= 0.83 : 1 (3/0) [1/0]
+|   |   |   |   |   |   |   |   |   |   |   |   |   |   1% >= 1.18 : 1 (4/0) [3/0]
+|   |   |   |   |   |   |   |   |   |   |   |   |   + >= 1.26 : 1 (4/0) [2/0]
+|   |   |   |   |   |   |   |   |   |   |   |   s >= 1.12
+|   |   |   |   |   |   |   |   |   |   |   |   |   select < 0.19 : 1 (7/1) [2/1]
+|   |   |   |   |   |   |   |   |   |   |   |   |   select >= 0.19 : 0 (2/0) [2/0]
+|   |   |   |   |   |   |   |   |   |   |   || >= 1.17 : 1 (6/0) [2/0]
+|   |   |   |   |   |   |   |   |   |   # >= 1.3 : 1 (6/0) [4/0]
+|   |   |   |   |   |   |   |   |   or >= 0.73 : 1 (24/3) [12/1]
+|   |   |   |   |   |   |   |   -- >= 0.88 : 1 (30/0) [20/0]
+|   |   |   |   |   |   |   lik >= 1.05 : 1 (54/0) [19/6]
+|   |   |   |   |   |   order >= 1.04
+|   |   |   |   |   |   |   by < 1.01 : 0 (2/0) [1/0]
+|   |   |   |   |   |   |   by >= 1.01 : 1 (63/0) [32/0]
+|   |   |   |   |   from >= 0.27
+|   |   |   |   |   |   information_schem < 1.7 : 0 (5122/1) [2569/0]
+|   |   |   |   |   |   information_schem >= 1.7 : 1 (2/0) [1/0]
+|   |   |   |   t1 >= 1.23 : 1 (42/2) [23/0]
+|   |   |   5 >= 1.03
+|   |   |   |   sleep < 1.24
+|   |   |   |   |   0 < 0.96
+|   |   |   |   |   |   and < 0.56
+|   |   |   |   |   |   |   pg_sleep < 1.69
+|   |   |   |   |   |   |   |   101 < 2.07 : 0 (87/0) [45/1]
+|   |   |   |   |   |   |   |   101 >= 2.07 : 1 (3/0) [4/0]
+|   |   |   |   |   |   |   pg_sleep >= 1.69 : 1 (5/0) [3/0]
+|   |   |   |   |   |   and >= 0.56 : 1 (12/0) [4/0]
+|   |   |   |   |   0 >= 0.96 : 1 (17/0) [6/0]
+|   |   |   |   sleep >= 1.24 : 1 (59/0) [33/0]
+|   |   al >= 0.92
+|   |   |   from < 0.27
+|   |   |   |   select < 0.19 : 0 (9/0) [6/0]
+|   |   |   |   select >= 0.19 : 1 (631/0) [314/1]
+|   |   |   from >= 0.27 : 0 (178/0) [76/0]
+|   = >= 0.33
+|   |   from < 0.27
+|   |   |   upd < 1.71
+|   |   |   |   join < 1.21 : 1 (1304/2) [640/7]
+|   |   |   |   join >= 1.21 : 0 (138/0) [82/0]
+|   |   |   upd >= 1.71 : 0 (142/0) [77/0]
+|   |   from >= 0.27
+|   |   |   wh < 0.45
+|   |   |   |   join < 1.21
+|   |   |   |   |   countr < 2.03 : 1 (300/1) [169/2]
+|   |   |   |   |   countr >= 2.03 : 0 (3/0) [5/0]
+|   |   |   |   join >= 1.21 : 0 (149/0) [79/0]
+|   |   |   wh >= 0.45
+|   |   |   |   dual < 1.3 : 0 (1269/4) [646/1]
+|   |   |   |   dual >= 1.3 : 1 (13/0) [9/0]
+1 >= 0.48
+|   lim < 1.42
+|   |   = < 0.33
+|   |   |   union < 0.83
+|   |   |   |   5 < 1.03
+|   |   |   |   |   5000000 < 1.4
+|   |   |   |   |   |   by < 1.01
+|   |   |   |   |   |   |   or < 0.73
+|   |   |   |   |   |   |   |   -- < 0.88 : 0 (95/19) [45/7]
+|   |   |   |   |   |   |   |   -- >= 0.88 : 1 (7/0) [2/0]
+|   |   |   |   |   |   |   or >= 0.73 : 1 (17/0) [7/0]
+|   |   |   |   |   |   by >= 1.01 : 1 (20/0) [7/1]
+|   |   |   |   |   5000000 >= 1.4 : 1 (38/0) [15/0]
+|   |   |   |   5 >= 1.03 : 1 (135/2) [68/0]
+|   |   |   union >= 0.83 : 1 (173/0) [88/0]
+|   |   = >= 0.33
+|   |   |   post_status < 2.26 : 1 (4457/4) [2246/4]
+|   |   |   post_status >= 2.26 : 0 (7/0) [4/0]
+|   lim >= 1.42
+|   |   el < 1
+|   |   |   distinct < 1.53 : 0 (123/0) [53/0]
+|   |   |   distinct >= 1.53 : 1 (23/0) [17/0]
+|   |   el >= 1 : 1 (36/0) [17/0]
+
+Size of the tree : 95
+
+Time taken to build model: 20.38 seconds
+
+=== Evaluation on test split ===
+
+Time taken to test model on test split: 0.13 seconds
+
+=== Summary ===
+
+Correctly Classified Instances        7061               99.2969 %
+Incorrectly Classified Instances        50                0.7031 %
+Kappa statistic                          0.9848
+Mean absolute error                      0.0125
+Root mean squared error                  0.0799
+Relative absolute error                  2.6985 %
+Root relative squared error             16.5964 %
+Total Number of Instances             7111     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.996    0.013    0.993      0.996    0.994      0.985    0.997     0.997     0
+                 0.987    0.004    0.993      0.987    0.990      0.985    0.997     0.995     1
+Weighted Avg.    0.993    0.009    0.993      0.993    0.993      0.985    0.997     0.996     
+
+=== Confusion Matrix ===
+
+    a    b   <-- classified as
+ 4498   17 |    a = 0
+   33 2563 |    b = 1
+
+
+=== Re-evaluation on test set ===
+
+User supplied test set
+Relation:     Test-weka.filters.unsupervised.attribute.NominalToString-C1-weka.filters.unsupervised.attribute.NumericToNominal-R2
+Instances:     unknown (yet). Reading incrementally
+Attributes:   2
+
+=== Summary ===
+
+Correctly Classified Instances       15034               97.2508 %
+Incorrectly Classified Instances       425                2.7492 %
+Kappa statistic                          0.7845
+Mean absolute error                      0.0295
+Root mean squared error                  0.156 
+Total Number of Instances            15459     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.843    0.019    0.759      0.843    0.799      0.786    0.950     0.789     0
+                 0.981    0.157    0.989      0.981    0.985      0.786    0.950     0.994     1
+Weighted Avg.    0.973    0.148    0.974      0.973    0.973      0.786    0.950     0.981     
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+   846   157 |     a = 0
+   268 14188 |     b = 1
+
