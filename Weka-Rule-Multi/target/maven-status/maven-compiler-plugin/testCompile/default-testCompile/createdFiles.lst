@@ -1,3 +1,4 @@
+TestNoBlocking.class
 testMulti\MultiTest.class
 testRule\TestDrools.class
 testAll\TestAll.class

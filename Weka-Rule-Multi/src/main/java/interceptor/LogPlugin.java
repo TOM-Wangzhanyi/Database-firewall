@@ -10,7 +10,6 @@ package com.example.meal_ordering_system.test;
  * @Version: v1.0
  */
 
-import multi.FinalAll;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -39,8 +38,16 @@ import java.util.Properties;
  */
 @Intercepts({
         @Signature(type = Executor.class,method = "query",args={MappedStatement.class,Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
-        @Signature(type = Executor.class,method = "query",args={MappedStatement.class,Object.class, RowBounds.class, ResultHandler.class}),
-        @Signature(type = Executor.class,method = "update",args={MappedStatement.class,Object.class})
+        @Signature(
+                method = "query",
+                type = Executor.class,
+                args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}
+        ),
+        @Signature(
+                type = Executor.class,
+                method = "update",
+                args = {MappedStatement.class, Object.class}
+        )
 })
 public class LogPlugin implements Interceptor {
 
@@ -64,16 +71,12 @@ public class LogPlugin implements Interceptor {
         BoundSql boundSql = mappedStatement.getBoundSql(parameter);
         Configuration configuration = mappedStatement.getConfiguration();
         long sqlStartTime = System.currentTimeMillis();
-        Object re = null;
-        if(1==1) {
-          /*  FinalAll finalAll = new FinalAll() ;
-            System.out.println(finalAll.finalAll("select * from user")) ;*/
-            re = invocation.proceed();
-        }
+        Object re = invocation.proceed();
         long sqlEndTime = System.currentTimeMillis();
         // 打印mysql执行语句
         String sql = getSql(configuration, boundSql, sqlId);
         System.out.println(sql);
+        writeToTXT(sql);
         // 打印mysql执行时间
         if (enableExecutorTime) {
             String sqlTimeLog = sqlId + " 方法对应sql执行时间:" + (sqlEndTime - sqlStartTime) + " ms";
@@ -113,7 +116,8 @@ public class LogPlugin implements Interceptor {
     }
 
     private static String getSql(Configuration configuration, BoundSql boundSql, String sqlId) {
-        return sqlId + " 方法对应sql执行语句:" + assembleSql(configuration, boundSql);
+       // return sqlId + " 方法对应sql执行语句:" + assembleSql(configuration, boundSql);
+        return assembleSql(configuration,boundSql) ;
     }
 
     /**
@@ -209,6 +213,17 @@ public class LogPlugin implements Interceptor {
             buff = str.getBytes();
             o = new FileOutputStream(file, true);
             o.write(buff);
+
+
+            // 添加换行
+            byte[] newline = "\n".getBytes();
+            o.write(newline);
+
+
+            byte[] duanju = "HUAWEI".getBytes();
+            o.write(duanju);
+
+
             o.flush();
             o.close();
         } catch (Exception e) {

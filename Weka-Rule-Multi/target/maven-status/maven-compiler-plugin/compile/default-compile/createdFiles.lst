@@ -6,6 +6,7 @@ com\example\meal_ordering_system\test\SqlPlugin.class
 com\example\meal_ordering_system\test\SelectPlugin.class
 rule\DroolsRuleServiceImpl.class
 rule\DroolsRule.class
+multi\DatabaseTask.class
 multi\SimpleUse.class
 multi\MLUseTask.class
 com\example\meal_ordering_system\test\LogPlugin.class

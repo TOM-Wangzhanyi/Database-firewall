@@ -18,7 +18,7 @@
         </plugin>
             <plugin interceptor="com.wzy.mybatis.plugin.SqlPlugin">
             </plugin>-->
-        <plugin interceptor="com.wzy.mybatis.plugin.TestNewDataSourcePlugin"></plugin>
+       <!-- <plugin interceptor="com.wzy.mybatis.plugin.TestNewDataSourcePlugin"></plugin>-->
         <!--<plugin interceptor="com.wzy.mybatis.plugin.LogPlugin"></plugin>-->
         <plugin interceptor="com.wzy.mybatis.plugin.SqlPlugin"></plugin>
     </plugins>

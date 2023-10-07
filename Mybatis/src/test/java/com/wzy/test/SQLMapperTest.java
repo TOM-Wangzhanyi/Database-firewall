@@ -1,7 +1,5 @@
 package com.wzy.test;
 
-import com.wzy.mybatis.baoqiang.Client3;
-import com.wzy.mybatis.baoqiang.Sever3;
 import com.wzy.mybatis.mapper.SQLMapper;
 import com.wzy.mybatis.pojo.User;
 import com.wzy.mybatis.utils.SqlSessionUtils;
