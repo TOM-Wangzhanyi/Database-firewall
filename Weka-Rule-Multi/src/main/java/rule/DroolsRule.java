@@ -39,6 +39,33 @@ public class DroolsRule {
      */
     private Date updateTime;
 
+
+
+
+
+    private String type ;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getRuleName() {
+        return ruleName;
+    }
+
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
+    }
+
+    private String ruleName ;
+
+
+
+
     public Long getRuleId() {
         return ruleId;
     }
@@ -91,6 +118,10 @@ public class DroolsRule {
     }
 
     public void validate() {
+        System.out.println(this.ruleId);
+        System.out.println(kieBaseName);
+        System.out.println(kiePackageName);
+        System.out.println(ruleContent);
         if (this.ruleId == null || isBlank(kieBaseName) || isBlank(kiePackageName) || isBlank(ruleContent)) {
             throw new RuntimeException("参数有问题");
         }

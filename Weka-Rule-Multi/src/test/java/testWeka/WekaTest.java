@@ -22,7 +22,7 @@ import weka.core.converters.ConverterUtils;
 public class WekaTest {
     @Test
     public void wekaTest() throws Exception {
-            String sql = "SELECT wide ( s )  FROM west" ;
+            String sql = "\\\" select * from users where id  =  1 +  (    )   union select null,@@VERSION -- 1\\\"" ;
             FilteredClassifier fc = WekaSingelton.getFcInstance() ;
             Instances demo = WekaSingelton.getDemoInstance() ;
             demo.setClassIndex(1);

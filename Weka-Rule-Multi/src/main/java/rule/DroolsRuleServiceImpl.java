@@ -1,11 +1,20 @@
 package rule;
 
 import entity.Result;
+import mapper.FireWallMapper;
+import multi.InitThreadPool;
+import org.apache.ibatis.session.SqlSession;
+import redis.clients.jedis.Jedis;
 import rule.DroolsManager;
 import rule.DroolsRule;
 import rule.DroolsRuleService;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * ClassName: DroolsRuleServiceImpl
@@ -19,86 +28,41 @@ import java.util.*;
 //用了static代码块来初始化droolsManager，然后后面用单例模式来调用这个droolsManager ；
 public class DroolsRuleServiceImpl implements DroolsRuleService {
 
+
+
+
+
+
     private static DroolsRuleServiceImpl droolsRuleServiceimpl ;
 
     private DroolsManager droolsManager = DroolsManager.getInstance() ;
 
-    //目前是创建一二两个规则，然后drop掉，然后三规则匹配就会通知匹配，四规则会修改result的结果，三的优先级目前设置比四要高
     static {
+
+        SqlSession sqlSession = com.wzy.mybatis.utils.SqlSessionUtils.getSqlSession();
+        FireWallMapper mapper = sqlSession.getMapper(FireWallMapper.class);
+        List<DroolsRule> rules = mapper.getAllRule();
         droolsRuleServiceimpl = new DroolsRuleServiceImpl() ;
-        DroolsRule drl = new DroolsRule() ;
-        String rule = "package first \n" +
-                "\n" +
-                "rule \"Prevent SQL Injection\" \n" +
-                "when \n" +
-                "    $s : String( this matches \".*[;\\\\-\\\\'].*\" ) \n" +
-                "then \n" +
-                "    System.out.println(\"SQL\" + \"Injection\"+\"Warnings!!!这是第一条规则\\n\"); \n" +
-                "end";
+        for(DroolsRule rule : rules){
+            if(rule.getType().equals("add")){
+                droolsRuleServiceimpl.addDroolsRule(rule);
+            }else if(rule.getType().equals("update")){
+                droolsRuleServiceimpl.updateDroolsRule(rule);
+            }
+            else if(rule.getType().equals("delete")){
+                droolsRuleServiceimpl.deleteDroolsRule(rule.getRuleId(),rule.getRuleName());
+            }
+        }
 
 
-        drl.setRuleContent(rule);
-        drl.setRuleId(1L);
-        drl.setKieBaseName("6");
-        drl.setKiePackageName("first");
 
-        droolsRuleServiceimpl.addDroolsRule(drl);
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        MessageHandler handler = new MessageHandler();
 
-        DroolsRule drl2 = new DroolsRule() ;
-        String rule2 = "package second \n" +
-                "\n" +
-                "rule \"Prevent SQL Injection2\" \n" +
-                "when \n" +
-                "    $s : String( this matches \".*[;\\\\-\\\\'].*\" ) \n" +
-                "then \n" +
-                "    System.out.println(\"SQL\" + \"Injection\"+\"Warnings!!!这是第二条规则\\n\"); \n" +
-                "end";
-        drl2.setRuleContent(rule2);
-        drl2.setRuleId(8L);
-        drl2.setKieBaseName("6");
-        drl2.setKiePackageName("second");
-        droolsRuleServiceimpl.addDroolsRule(drl2);
-
-
-        droolsRuleServiceimpl.getDroolsManager().destroy();
-        //      droolsRuleServiceimpl.getDroolsManager().deleteDroolsRule(drl,"Prevent SQL Injection");
-
-
-        DroolsRule drl3 = new DroolsRule() ;
-        String rule3 = "package first \n" +
-                "\n" +
-                "rule \"Prevent SQL Injection3\" \n" +
-                "salience 1"+
-                "when \n" +
-                "    $s : String( this matches \".*[;\\\\-\\\\'].*\" ) \n" +
-                "then \n" +
-                "    System.out.println(\"SQL\" + \"Injection\"+\"Warnings!!!这是第三条规则\\n\"); \n" +
-                  "drools.halt();\n" +
-                "end";
-        drl3.setRuleContent(rule3);
-        drl3.setRuleId(9L);
-        drl3.setKieBaseName("6");
-        drl3.setKiePackageName("first");
-        droolsRuleServiceimpl.addDroolsRule(drl3);
-     //   droolsRuleServiceimpl.deleteDroolsRule(9L,"Prevent SQL Injection3");
-
-        DroolsRule drl4 = new DroolsRule() ;
-        String rule4 = "package first \n" +
-                "\n" + "import entity.Result\n"+ "\n" +
-                "rule \"Prevent SQL Injection4\" \n" +
-                "salience 2\n" +
-                "when \n" +
-                "    $s : String( this matches \".*[;\\\\-\\\\'].*\" ) \n" +
-                "$result : Result()\n"+
-                "then \n" +
-                "    System.out.println(\"SQL\" + \"Injection\"+\"Warnings!!!这是第四条规则\\n\"); \n" +
-                "$result.setResult(10);\n"+
-                "end";
-        drl4.setRuleContent(rule4);
-        drl4.setRuleId(11L);
-        drl4.setKieBaseName("6");
-        drl4.setKiePackageName("first");
-        droolsRuleServiceimpl.addDroolsRule(drl4);
+        ExecutorService executor = InitThreadPool.getInstance();
+        executor.execute(() -> {
+            jedis.subscribe(handler, "channel1");
+        });
     }
 
     /**
@@ -145,6 +109,17 @@ public class DroolsRuleServiceImpl implements DroolsRuleService {
     }
     public static DroolsRuleService getInstance(){
         return droolsRuleServiceimpl ;
+    }
+
+
+    public static void changeAdd(DroolsRule droolsRule){
+        droolsRuleServiceimpl.addDroolsRule(droolsRule);
+    }
+    public static void changeUpdate(DroolsRule droolsRule){
+
+    }
+    public static void changeDelete(Long ruleId, String ruleName){
+        droolsRuleServiceimpl.deleteDroolsRule(ruleId, ruleName);
     }
 
     public void init(){

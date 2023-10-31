@@ -18,6 +18,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * ClassName: DroolsManager
@@ -42,6 +45,15 @@ public class DroolsManager {
     private KieContainer kieContainer;
 
     private static  DroolsManager droolsManager = new DroolsManager() ;
+
+
+
+    //加上读写锁，只允许一个线程写，允许多个线程同时读
+    private final ReadWriteLock rwlock = new ReentrantReadWriteLock();
+    private final Lock rlock = rwlock.readLock();
+    private final Lock wlock = rwlock.writeLock();
+
+
 
     //全部更新，关键existkiebase方法要返回null，不然会导致找包的时候报空指针
     public void destroy() {
@@ -73,17 +85,22 @@ public class DroolsManager {
     }
 
     public void deleteDroolsRule(DroolsRule droolsRule, String ruleName) {
-        String kieBaseName = droolsRule.getKieBaseName();
-        String packageName = droolsRule.getKiePackageName();
-        if (existsKieBase(kieBaseName)) {
-            KieBase kieBase = kieContainer.getKieBase(kieBaseName);
-            System.out.println(kieBase.getKiePackages());
-            System.out.println(kieBase.getKiePackage("first").getRules());
-            kieBase.removeRule(packageName, ruleName);
-            String file = "src/main/resources/" + droolsRule.getKiePackageName() + "/" + droolsRule.getRuleId() + ".drl";
-            kieFileSystem.delete(file);
-            buildKieContainer();
-            log.info("删除kieBase:[{}]包:[{}]下的规则:[{}]", kieBaseName, packageName, ruleName);
+        wlock.lock();
+        try{
+            String kieBaseName = droolsRule.getKieBaseName();
+            String packageName = droolsRule.getKiePackageName();
+            if (existsKieBase(kieBaseName)) {
+                KieBase kieBase = kieContainer.getKieBase(kieBaseName);
+                System.out.println(kieBase.getKiePackages());
+                System.out.println(kieBase.getKiePackage("first").getRules());
+                kieBase.removeRule(packageName, ruleName);
+                String file = "src/main/resources/" + droolsRule.getKiePackageName() + "/" + droolsRule.getRuleId() + ".drl";
+                kieFileSystem.delete(file);
+                buildKieContainer();
+                log.info("删除kieBase:[{}]包:[{}]下的规则:[{}]", kieBaseName, packageName, ruleName);
+            }
+        }finally {
+            wlock.unlock();
         }
     }
 
@@ -91,49 +108,54 @@ public class DroolsManager {
      * 添加或更新 drools 规则
      */
     public void addOrUpdateRule(DroolsRule droolsRule) {
-        // 获取kbase的名称
-        String kieBaseName = droolsRule.getKieBaseName();
-        // 判断该kbase是否存在
-        boolean existsKieBase = existsKieBase(kieBaseName);
-        // 该对象对应kmodule.xml中的kbase标签
-        KieBaseModel kieBaseModel = null;
-        if (!existsKieBase) {
-            // 创建一个kbase
-            kieBaseModel = kieModuleModel.newKieBaseModel(kieBaseName);
-            // 不是默认的kieBase
-            kieBaseModel.setDefault(false);
-            // 设置该KieBase需要加载的包路径
-            kieBaseModel.addPackage(droolsRule.getKiePackageName());
-            // 设置kieSession
-            kieBaseModel.newKieSessionModel(kieBaseName + "-session")
-                    // 不是默认session
-                    .setDefault(false);
-        } else {
-            // 获取到已经存在的kbase对象
-            kieBaseModel = kieModuleModel.getKieBaseModels().get(kieBaseName);
-            // 获取到packages
-            List<String> packages = kieBaseModel.getPackages();
-            if (!packages.contains(droolsRule.getKiePackageName())) {
+        wlock.lock();
+        try{ // 获取kbase的名称
+            String kieBaseName = droolsRule.getKieBaseName();
+            // 判断该kbase是否存在
+            boolean existsKieBase = existsKieBase(kieBaseName);
+            // 该对象对应kmodule.xml中的kbase标签
+            KieBaseModel kieBaseModel = null;
+            if (!existsKieBase) {
+                // 创建一个kbase
+                kieBaseModel = kieModuleModel.newKieBaseModel(kieBaseName);
+                // 不是默认的kieBase
+                kieBaseModel.setDefault(false);
+                // 设置该KieBase需要加载的包路径
                 kieBaseModel.addPackage(droolsRule.getKiePackageName());
-                log.info("kieBase:{}添加一个新的包:{}", kieBaseName, droolsRule.getKiePackageName());
+                // 设置kieSession
+                kieBaseModel.newKieSessionModel(kieBaseName + "-session")
+                        // 不是默认session
+                        .setDefault(false);
             } else {
-                //说明kiebase以及对应的package都已经存在了的，已经不需要哦再去加载了
-                kieBaseModel = null;
+                // 获取到已经存在的kbase对象
+                kieBaseModel = kieModuleModel.getKieBaseModels().get(kieBaseName);
+                // 获取到packages
+                List<String> packages = kieBaseModel.getPackages();
+                if (!packages.contains(droolsRule.getKiePackageName())) {
+                    kieBaseModel.addPackage(droolsRule.getKiePackageName());
+                    log.info("kieBase:{}添加一个新的包:{}", kieBaseName, droolsRule.getKiePackageName());
+                } else {
+                    //说明kiebase以及对应的package都已经存在了的，已经不需要哦再去加载了
+                    kieBaseModel = null;
+                }
             }
-        }
-        //drl文件中的package名字要和kiebase的package名字相对应，package全局唯一，而且一个kbase对应多个package，package之间不隔离
-        //kbase之间隔离
-        String file = "src/main/resources/" + droolsRule.getKiePackageName() + "/" + droolsRule.getRuleId() + ".drl";
-        log.info("加载虚拟规则文件:{}", file);
-        kieFileSystem.write(file, droolsRule.getRuleContent());
+            //drl文件中的package名字要和kiebase的package名字相对应，package全局唯一，而且一个kbase对应多个package，package之间不隔离
+            //kbase之间隔离
+            String file = "src/main/resources/" + droolsRule.getKiePackageName() + "/" + droolsRule.getRuleId() + ".drl";
+            log.info("加载虚拟规则文件:{}", file);
+            kieFileSystem.write(file, droolsRule.getRuleContent());
 
-        if (kieBaseModel != null) {
-            String kmoduleXml = kieModuleModel.toXML();
-            log.info("加载kmodule.xml:[\n{}]", kmoduleXml);
-            kieFileSystem.writeKModuleXML(kmoduleXml);
-        }
+            if (kieBaseModel != null) {
+                String kmoduleXml = kieModuleModel.toXML();
+                log.info("加载kmodule.xml:[\n{}]", kmoduleXml);
+                kieFileSystem.writeKModuleXML(kmoduleXml);
+            }
 
-        buildKieContainer();
+            buildKieContainer();}
+
+        finally {
+            wlock.unlock(); // 释放写锁
+        }
     }
 
     /**
@@ -166,19 +188,22 @@ public class DroolsManager {
      * 触发规则，此处简单模拟，会向规则中插入一个String类型的值
      */
     public Result fireRule(String kieBaseName, String param) {
-        Result result = new Result(100) ;
-        // 创建kieSession
-        KieSession kieSession = kieContainer.newKieSession(kieBaseName + "-session");
-        // StringBuilder resultInfo = new StringBuilder();
-        // kieSession.setGlobal("resultInfo", resultInfo);
-        kieSession.insert(param);
-        kieSession.insert(result) ;
-        System.out.println("插入数据了"+param);
-        kieSession.fireAllRules();
-        System.out.println("触发规则了");
-        kieSession.dispose();
-        //  return resultInfo.toString();
-        return result ;
+        rlock.lock();
+        try{Result result = new Result(100) ;
+            // 创建kieSession
+            KieSession kieSession = kieContainer.newKieSession(kieBaseName + "-session");
+            // StringBuilder resultInfo = new StringBuilder();
+            // kieSession.setGlobal("resultInfo", resultInfo);
+            kieSession.insert(param);
+            kieSession.insert(result) ;
+            System.out.println("插入数据了"+param);
+            kieSession.fireAllRules();
+            System.out.println("触发规则了");
+            kieSession.dispose();
+            //  return resultInfo.toString();
+            return result ;}finally {
+            rlock.unlock();
+        }
     }
 
     private DroolsManager(){
@@ -186,5 +211,23 @@ public class DroolsManager {
     public static DroolsManager getInstance(){
         return droolsManager ;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+//    public static void changeAdd(DroolsRule droolsRule){
+//        droolsManager.addOrUpdateRule(droolsRule);
+//    }
+//    public static void changeDelete(DroolsRule droolsRule, String ruleName){
+//        droolsManager.deleteDroolsRule(droolsRule, ruleName);
+//    }
 }
 

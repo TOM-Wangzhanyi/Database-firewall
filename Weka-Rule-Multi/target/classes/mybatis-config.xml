@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="jdbc.properties"/>
+    
+<!--    <typeAliases>-->
+<!--        <package name="com.wzy.mybatis.pojo"/>-->
+<!--    </typeAliases>-->
+
+<!--    <plugins>-->
+<!--&lt;!&ndash;        <plugin interceptor="com.wzy.mybatis.plugin.SqlPlugin"></plugin>&ndash;&gt;-->
+<!--&lt;!&ndash;        <plugin interceptor="com.wzy.mybatis.plugin.LogPlugin"></plugin>&ndash;&gt;-->
+<!--        &lt;!&ndash; <plugin interceptor="com.wzy.mybatis.plugin.ExamplePlugin">-->
+<!--            <property name="someProperty" value="100"/>-->
+<!--        </plugin>-->
+<!--        <plugin interceptor="com.wzy.mybatis.plugin.ParameterHandlerPlugin">-->
+<!--        </plugin>-->
+<!--            <plugin interceptor="com.wzy.mybatis.plugin.SqlPlugin">-->
+<!--            </plugin>&ndash;&gt;-->
+<!--        &lt;!&ndash;<plugin interceptor="com.wzy.mybatis.plugin.TestNewDataSourcePlugin"></plugin>&ndash;&gt;-->
+<!--    </plugins>-->
+
+    <!--设置连接数据库的环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="prod">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="${test.jdbc.url}"/>
+                <property name="username" value="${test.jdbc.username}"/>
+                <property name="password" value="${test.jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+    <!--引入映射文件-->
+    <mappers>
+        <mapper resource="com/wzy/mybatis/mapper/FireWallMapper.xml"/>
+    </mappers>
+</configuration>

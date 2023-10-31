@@ -4,6 +4,9 @@ import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.StampedLock;
 
 import static weka.core.SerializationHelper.read;
@@ -20,6 +23,8 @@ import static weka.core.SerializationHelper.read;
 public class WekaSingelton {
     private static FilteredClassifier fc ;
     private static Instances demo ;
+
+
     static {
         try {
             fc = (FilteredClassifier) weka.core.SerializationHelper.read("src/main/resources/trained-Classifier/fc.model");
@@ -40,6 +45,7 @@ public class WekaSingelton {
     }
 
     public static void changeFc(String path) {
+
         try {
             fc = (FilteredClassifier) weka.core.SerializationHelper.read(path);
         } catch (Exception e) {
